@@ -6,6 +6,8 @@ authors = ["Jake Coble <jakecoble@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+requests = "^2.24.0"
+beautifulsoup4 = "^4.9.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
