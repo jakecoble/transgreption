@@ -1,6 +1,7 @@
 import flask
 import requests
 from bs4 import BeautifulSoup
+from slugify import slugify
 
 app = flask.Flask(__name__)
 
@@ -12,9 +13,10 @@ def fetch():
     soup = BeautifulSoup(res.text)
     links = [anchor.get('href') for anchor in soup.find_all('a')]
 
-    sites = []
+    sites = {}
     for link in links:
         ext_res = requests.get(link)
-        sites.append(ext_res.text)
+        key = slugify(link)
+        sites[key] = ext_res.text
 
     return flask.render_template('index.html', sites=sites)

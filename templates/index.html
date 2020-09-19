@@ -20,9 +20,9 @@
             </p>
         <![endif]-->
 
-        {% for site in sites %}
-        <div>
-            {{ site|safe }}
+        {% for key, body in sites.items() %}
+        <div id="#{{ key }}">
+            {{ body|safe }}
         </div>
         {% endfor %}
     </body>
