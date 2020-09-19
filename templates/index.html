@@ -20,10 +20,8 @@
             </p>
         <![endif]-->
 
-        {% for key, body in sites.items() %}
-        <div id="#{{ key }}">
-            {{ body|safe }}
-        </div>
+        {% for key, link in sites.items() %}
+        <iframe id="#{{ key }}" src="{{ link }}" width="300" height="600"></iframe>
         {% endfor %}
     </body>
 </html>

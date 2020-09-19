@@ -15,8 +15,7 @@ def fetch():
 
     sites = {}
     for link in links:
-        ext_res = requests.get(link)
         key = slugify(link)
-        sites[key] = ext_res.text
+        sites[key] = link
 
     return flask.render_template('index.html', sites=sites)
