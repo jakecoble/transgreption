@@ -20,15 +20,10 @@
             </p>
         <![endif]-->
 
-        Hello, word!
-
-        <form method="" id="url-form" action="">
-            <input type="text" name="url" value="" placeholder="put url here">
-
-            <button>Submit</button>
-        </form>
-
-        <script type="text/javascript" src="{{ js_file }}"></script>
-
+        {% for site in sites %}
+        <div>
+            {{ site }}
+        </div>
+        {% endfor %}
     </body>
 </html>
