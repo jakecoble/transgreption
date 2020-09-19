@@ -22,7 +22,7 @@
 
         {% for site in sites %}
         <div>
-            {{ site }}
+            {{ site|safe }}
         </div>
         {% endfor %}
     </body>
