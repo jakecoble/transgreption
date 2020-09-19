@@ -155,6 +155,14 @@ pyparsing = ">=2.0.2"
 six = "*"
 
 [[package]]
+name = "pipe"
+version = "1.6.0"
+description = "Module enablig a sh like infix syntax (using pipes)"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "pluggy"
 version = "0.13.1"
 description = "plugin and hook calling mechanisms for python"
@@ -295,7 +303,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.0"
 python-versions = "^3.8"
-content-hash = "214210dc8ab0990df7d990cc3418488d4e94c986157a2cb969203b0de604fa82"
+content-hash = "c6cb28f48820b51697e1753fc673e26809c850d835f79648fb3e9ae17917a72a"
 
 [metadata.files]
 atomicwrites = [
@@ -389,6 +397,10 @@ more-itertools = [
 packaging = [
     {file = "packaging-20.4-py2.py3-none-any.whl", hash = "sha256:998416ba6962ae7fbd6596850b80e17859a5753ba17c32284f67bfff33784181"},
     {file = "packaging-20.4.tar.gz", hash = "sha256:4357f74f47b9c12db93624a82154e9b120fa8293699949152b22065d556079f8"},
+]
+pipe = [
+    {file = "pipe-1.6.0-py2.py3-none-any.whl", hash = "sha256:cb89e7c553d819e97fa912afaf592c2553fa7b92c047c47772b4a96ef59c8825"},
+    {file = "pipe-1.6.0.tar.gz", hash = "sha256:9bec3a88f8829f5074507795bc633603d61c025c88069f4d865018c721c6aa31"},
 ]
 pluggy = [
     {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},

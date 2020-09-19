@@ -4,8 +4,16 @@ from bs4 import BeautifulSoup
 from slugify import slugify
 from urllib.parse import urlparse
 import cssutils
+from pipe import Pipe
 
 app = flask.Flask(__name__)
+
+
+def splat_it(self, other):
+    return self.function(*other)
+
+
+Pipe.__rmul__ = splat_it
 
 
 def relative_to_absolute(host, url):
@@ -19,9 +27,11 @@ def relative_to_absolute(host, url):
     return host + sep + url
 
 
-def inline_css(slug, host, html):
-    soup = BeautifulSoup(html)
+@Pipe
+def inline_css(host, soup):
+    slug = slugify(host)
     style_links = soup.find_all('link', rel='stylesheet')
+    style_links.extract()
 
     for link in style_links:
         url = link.get('href')
@@ -37,9 +47,9 @@ def inline_css(slug, host, html):
 
         style_tag.string = str(sheet.cssText, encoding="utf-8")
         style_tag['data-sandwich'] = "source:" + url
-        link.replace_with(style_tag)
+        soup.head.append(style_tag)
 
-    return soup
+    return host, soup
 
 
 @app.route('/')
