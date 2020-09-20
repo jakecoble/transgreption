@@ -7,6 +7,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css" media="screen" />
+
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
@@ -21,7 +23,18 @@
         <![endif]-->
 
         {% for key, link in sites.items() %}
-        <iframe id="#{{ key }}" src="{{ link }}" width="300" height="600"></iframe>
+        <div>
+            <div class="source-url">
+                {{ link }}
+            </div>
+            <iframe class="site-frame" id="#{{ key }}" src="{{ link }}"></iframe>
+            <div class="loading">
+                Loading Page...
+            </div>
+        </div>
         {% endfor %}
+
+        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+
     </body>
 </html>

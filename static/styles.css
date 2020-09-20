@@ -1,0 +1,30 @@
+body, iframe {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+.site-frame {
+    display: none;
+    width: 100%;
+    height: 100vh;
+}
+
+.loaded .site-frame {
+    display: block;
+}
+
+.loading {
+    height: 100vh;
+    background-color: red;
+    color: white;
+}
+
+.loaded .loading {
+    display: none;
+}
+
+.source-url {
+    padding: 10px;
+    font-weight: bold;
+}
