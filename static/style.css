@@ -1,0 +1,14 @@
+.site-container {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.site-link {
+    width: 25%;
+    flex: none;
+}
+
+.site-content {
+    width: 75%;
+    flex: none;
+}
