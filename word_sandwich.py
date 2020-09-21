@@ -5,6 +5,7 @@ from slugify import slugify
 
 app = flask.Flask(__name__)
 
+
 @app.route('/')
 def fetch():
     url = flask.request.args.get('q')
