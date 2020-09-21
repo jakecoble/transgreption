@@ -6,6 +6,7 @@
         <title>Word Sandwich</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="referrer" content="same-origin">
 
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
@@ -20,10 +21,18 @@
             </p>
         <![endif]-->
 
-        {% for key, body in sites.items() %}
-        <div id="#{{ key }}">
-            {{ body|safe }}
+        <div class="container">
+            {% for key, data in sites.items() %}
+            <div id="#{{ key }}" class="site-container">
+                <div class="site-link">
+                    <a href="{{ data['src'] }}">{{ data['src'] }}</a>
+                </div>
+
+                <div class="site-content">
+                    {{ data['body']|safe }}
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </body>
 </html>

@@ -15,8 +15,15 @@ def fetch():
 
     sites = {}
     for link in links:
-        ext_res = requests.get(link)
         key = slugify(link)
-        sites[key] = ext_res.text
+        sites[key] = {}
+        sites[key]['src'] = link
+
+        try:
+            ext_res = requests.get(link)
+            link_soup = BeautifulSoup(ext_res.text)
+            sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
+        except Exception as e:
+            sites[key]['body'] = 'Failed to load with error {}.'.format(e)
 
     return flask.render_template('index.html', sites=sites)
