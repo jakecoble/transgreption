@@ -28,17 +28,22 @@
                 <ul class="site-links">
                     {% for key, data in sites.items() %}
                         <li id="{{ key }}-link" class="link">
-                            <a href="{{ data['src'] }}">{{ data['title'] }}</a>
+                            <a href="#{{ key }}" class="{{ 'site-load-error' if data['error'] }}">{{ data['title'] }}</a>
                         </li>
                     {% endfor %}
                 </ul>
             </div>
 
-            {% for key, data in sites.items() %}
-            <div id="#{{ key }}" class="site-container">
-                {{ data['body']|safe }}
+            <div class="site-list">
+                {% for key, data in sites.items() %}
+                <div id="#{{ key }}" class="site-container">
+                    <h2 class="site-title{{ ' site-load-error' if data['error'] }}">{{ data['title'] }}</h2>
+                    <div class="site-content">
+                        {{ data['body']|safe }}
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </body>
 </html>

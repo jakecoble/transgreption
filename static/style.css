@@ -40,12 +40,31 @@ body {
     display: block;
 }
 
-.site-container {
+.site-list {
     width: 75%;
     float: right;
 }
 
+.site-container {
+    margin-bottom: 100px;
+}
+
+.site-content {
+    padding: 25px;
+}
+
 .highlighted-site {
-    background-color: black;
-    color: white;
+}
+
+.site-title {
+    background-color: #040f16;
+    color: #fbfbff;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 25px;
+}
+
+.site-load-error {
+    background-color: #4B0F16;
+    color: #FBE5E5;
 }

@@ -34,12 +34,16 @@ def fetch():
             link_soup = BeautifulSoup(ext_res.text)
             sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
             sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
+            sites[key]['error'] = False
         except (requests.ConnectionError, requests.HTTPError) as e:
-            sites[key]['body'] = 'Failed to load with error {}.'.format(e)
+            sites[key]['title'] = 'Failed to fetch this site!'
+            sites[key]['error'] = True
+            sites[key]['body'] = str(e)
 
     return flask.render_template('index.html', sites=sites)
 
 
 if __name__ == '__main__':
+    app.debug = True
     server = Server(app.wsgi_app)
     server.serve()
