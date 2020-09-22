@@ -24,15 +24,19 @@
         <![endif]-->
 
         <div class="container">
+            <div class="sidebar">
+                <ul class="site-links">
+                    {% for key, data in sites.items() %}
+                        <li id="{{ key }}-link" class="link">
+                            <a href="{{ data['src'] }}">{{ data['title'] }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
             {% for key, data in sites.items() %}
             <div id="#{{ key }}" class="site-container">
-                <div class="site-link">
-                    <a href="{{ data['src'] }}">{{ data['title'] }}</a>
-                </div>
-
-                <div class="site-content">
-                    {{ data['body']|safe }}
-                </div>
+                {{ data['body']|safe }}
             </div>
             {% endfor %}
         </div>

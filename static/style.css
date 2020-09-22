@@ -1,14 +1,51 @@
-.site-container {
-    display: flex;
-    margin-bottom: 25px;
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 
-.site-link {
+.container {
+}
+
+.sidebar div,
+.sidebar ul,
+.sidebar li,
+.sidebar a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.sidebar {
     width: 25%;
-    flex: none;
+    height: 100vh;
+    position: fixed;
+    background-color: #040f16;
+    color: #fbfbff;
+    font-family: sans-serif;
 }
 
-.site-content {
+.site-links {
+
+}
+
+.site-links .link {
+
+}
+
+.site-links .link a {
+    color: inherit;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+.site-container {
     width: 75%;
-    flex: none;
+    float: right;
+}
+
+.highlighted-site {
+    background-color: black;
+    color: white;
 }
