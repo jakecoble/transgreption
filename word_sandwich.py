@@ -2,6 +2,7 @@ import flask
 import requests
 from bs4 import BeautifulSoup
 from slugify import slugify
+from livereload import Server
 
 app = flask.Flask(__name__)
 
@@ -37,3 +38,8 @@ def fetch():
             sites[key]['body'] = 'Failed to load with error {}.'.format(e)
 
     return flask.render_template('index.html', sites=sites)
+
+
+if __name__ == '__main__':
+    server = Server(app.wsgi_app)
+    server.serve()
