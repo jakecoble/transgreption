@@ -31,6 +31,7 @@ def fetch():
                 raise requests.HTTPError('Wrong content type')
 
             link_soup = BeautifulSoup(ext_res.text)
+            sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
             sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
         except (requests.ConnectionError, requests.HTTPError) as e:
             sites[key]['body'] = 'Failed to load with error {}.'.format(e)
