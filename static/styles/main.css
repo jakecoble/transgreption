@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.container {
+    overflow: auto;
+}
+
+.sidebar div,
+.sidebar ul,
+.sidebar li,
+.sidebar a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.sidebar {
+    width: 25%;
+    height: 100vh;
+    position: fixed;
+    background-color: #040f16;
+    color: #fbfbff;
+    font-family: sans-serif;
+}
+
+.site-links {
+
+}
+
+.site-links .link {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.site-links .link a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+}
+
+.site-list {
+    width: 75%;
+    float: right;
+}
+
+.site-container {
+    margin-bottom: 100px;
+}
+
+.site-content {
+    padding: 25px;
+}
+
+.highlighted-site {
+}
+
+.site-title {
+    background-color: #040f16;
+    color: #fbfbff;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 25px;
+}
+
+.site-load-error {
+    background-color: #4B0F16;
+    color: #FBE5E5;
+}
+
+.site-external-link {
+    flex: content;
+}
+
+.icon-new-tab:before {
+  content: "\ea7e";
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Word Sandwich</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="referrer" content="same-origin">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/icomoon.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}" type="text/css" media="screen" />
+
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">
+            You are using an <strong>outdated</strong> browser. Please
+            <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+            your experience.
+            </p>
+        <![endif]-->
+
+        <div class="container">
+            <div class="sidebar">
+                <ul class="site-links">
+                    {% for key, data in sites.items() %}
+                        <li id="{{ key }}-link" class="link {{ 'site-load-error' if data['error'] }}">
+                            <a href="#{{ key }}">{{ data['title'] }}</a>
+                            <a href="{{ data['src'] }}" class="site-external-link"><span class="icon-new-tab"></span></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="site-list">
+                {% for key, data in sites.items() %}
+                <div class="site-container">
+                    <h2 id="{{ key }}" class="site-title{{ ' site-load-error' if data['error'] }}">{{ data['title'] }}</h2>
+                    <div class="site-content">
+                        {{ data['body']|safe }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
