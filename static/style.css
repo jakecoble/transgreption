@@ -12,3 +12,8 @@
     width: 75%;
     flex: none;
 }
+
+object {
+    width: 100%;
+    height: 100vh;
+}
