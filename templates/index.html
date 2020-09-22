@@ -28,8 +28,8 @@
             <div class="sidebar">
                 <ul class="site-links">
                     {% for key, data in sites.items() %}
-                        <li id="{{ key }}-link" class="link">
-                            <a href="#{{ key }}" class="{{ 'site-load-error' if data['error'] }}">{{ data['title'] }}</a>
+                        <li id="{{ key }}-link" class="link {{ 'site-load-error' if data['error'] }}">
+                            <a href="#{{ key }}">{{ data['title'] }}</a>
                             <a href="{{ data['src'] }}" class="site-external-link"><span class="icon-new-tab"></span></a>
                         </li>
                     {% endfor %}

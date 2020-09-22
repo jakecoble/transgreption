@@ -5,6 +5,7 @@ body {
 }
 
 .container {
+    overflow: auto;
 }
 
 .sidebar div,
@@ -30,13 +31,14 @@ body {
 }
 
 .site-links .link {
-
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
 }
 
 .site-links .link a {
     color: inherit;
     text-decoration: none;
-    padding: 10px;
     display: block;
 }
 
@@ -70,6 +72,7 @@ body {
 }
 
 .site-external-link {
+    flex: content;
 }
 
 .icon-new-tab:before {
