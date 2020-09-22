@@ -68,3 +68,10 @@ body {
     background-color: #4B0F16;
     color: #FBE5E5;
 }
+
+.site-external-link {
+}
+
+.icon-new-tab:before {
+  content: "\ea7e";
+}

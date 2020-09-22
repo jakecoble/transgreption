@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="referrer" content="same-origin">
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/icomoon.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}" type="text/css" media="screen" />
 
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
@@ -29,6 +30,7 @@
                     {% for key, data in sites.items() %}
                         <li id="{{ key }}-link" class="link">
                             <a href="#{{ key }}" class="{{ 'site-load-error' if data['error'] }}">{{ data['title'] }}</a>
+                            <a href="{{ data['src'] }}" class="site-external-link"><span class="icon-new-tab"></span></a>
                         </li>
                     {% endfor %}
                 </ul>
