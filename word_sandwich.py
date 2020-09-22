@@ -22,9 +22,15 @@ def fetch():
 
         try:
             ext_res = requests.get(link)
+            ext_res.raise_for_status()
+
+            content_type = ext_res.headers.get('content-type')
+            if not content_type.startswith('text/html'):
+                raise requests.HTTPError('Wrong content type')
+
             link_soup = BeautifulSoup(ext_res.text)
             sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
-        except Exception as e:
+        except (requests.ConnectionError, requests.HTTPError) as e:
             sites[key]['body'] = 'Failed to load with error {}.'.format(e)
 
     return flask.render_template('index.html', sites=sites)
