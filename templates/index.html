@@ -36,8 +36,8 @@
 
             <div class="site-list">
                 {% for key, data in sites.items() %}
-                <div id="#{{ key }}" class="site-container">
-                    <h2 class="site-title{{ ' site-load-error' if data['error'] }}">{{ data['title'] }}</h2>
+                <div class="site-container">
+                    <h2 id="{{ key }}" class="site-title{{ ' site-load-error' if data['error'] }}">{{ data['title'] }}</h2>
                     <div class="site-content">
                         {{ data['body']|safe }}
                     </div>
