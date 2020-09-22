@@ -20,8 +20,10 @@ def fetch():
         sites[key] = {}
         sites[key]['src'] = link
 
+        user_agent = flask.request.user_agent
+
         try:
-            ext_res = requests.get(link)
+            ext_res = requests.get(link, headers={'user-agent': str(user_agent)})
             ext_res.raise_for_status()
 
             content_type = ext_res.headers.get('content-type')
