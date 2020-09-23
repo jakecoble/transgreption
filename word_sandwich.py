@@ -11,6 +11,10 @@ app = flask.Flask(__name__)
 @app.route('/')
 def fetch():
     url = flask.request.args.get('q')
+
+    if not url:
+        return flask.render_template('no-url.html')
+
     res = requests.get(url_normalize(url))
 
     soup = BeautifulSoup(res.text)
