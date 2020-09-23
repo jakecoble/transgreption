@@ -3,6 +3,10 @@ import requests
 from bs4 import BeautifulSoup
 from slugify import slugify
 from livereload import Server
+<<<<<<< HEAD
+=======
+from url_normalize import url_normalize
+>>>>>>> master
 
 app = flask.Flask(__name__)
 
@@ -10,7 +14,11 @@ app = flask.Flask(__name__)
 @app.route('/')
 def fetch():
     url = flask.request.args.get('q')
+<<<<<<< HEAD
     res = requests.get(url)
+=======
+    res = requests.get(url_normalize(url))
+>>>>>>> master
 
     soup = BeautifulSoup(res.text)
     links = [anchor.get('href') for anchor in soup.find_all('a')]
