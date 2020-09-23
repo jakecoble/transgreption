@@ -39,7 +39,12 @@ body {
 .site-links .link a {
     color: inherit;
     text-decoration: none;
-    display: block;
+}
+
+.site-internal-link {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
 }
 
 .site-list {
@@ -55,9 +60,6 @@ body {
     padding: 25px;
 }
 
-.highlighted-site {
-}
-
 .site-title {
     background-color: #040f16;
     color: #fbfbff;
@@ -71,10 +73,19 @@ body {
     color: #FBE5E5;
 }
 
+.link.site-load-error {
+    white-space: nowrap;
+}
+
 .site-external-link {
     flex: content;
 }
 
 .icon-warning {
     margin: 0 0.5em;
+}
+
+.focused-link {
+    background-color: #00AFB5;
+    transition: background-color 0.5s;
 }
