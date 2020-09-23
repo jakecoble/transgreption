@@ -75,6 +75,6 @@ body {
     flex: content;
 }
 
-.icon-new-tab:before {
-  content: "\ea7e";
+.icon-warning {
+    margin: 0 0.5em;
 }

@@ -40,13 +40,13 @@ def fetch():
                 raise requests.HTTPError('Wrong content type')
 
             link_soup = BeautifulSoup(ext_res.text)
-            sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
             sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
             sites[key]['error'] = False
         except (requests.ConnectionError, requests.HTTPError) as e:
-            sites[key]['title'] = 'Failed to fetch this site!'
             sites[key]['error'] = True
             sites[key]['body'] = str(e)
+        finally:
+            sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
 
     return flask.render_template('index.html', sites=sites)
 
