@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from slugify import slugify
 from livereload import Server
 from url_normalize import url_normalize
+import url_transforms
 
 app = flask.Flask(__name__)
 
@@ -25,7 +26,8 @@ def fetch():
         return flask.render_template('error.html', error=str(e))
 
     sites = {}
-    for link in links:
+    for raw_link in links:
+        link = url_transforms.apply(raw_link)
         key = slugify(link)
         sites[key] = {}
         sites[key]['src'] = link
