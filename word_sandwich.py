@@ -37,17 +37,22 @@ def fetch():
             ext_res.raise_for_status()
 
             content_type = ext_res.headers.get('content-type')
-            if not content_type.startswith('text/html'):
+            if content_type.startswith('text/html'):
+                link_soup = BeautifulSoup(ext_res.text)
+                sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
+                sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
+            elif content_type.startswith('text/plain'):
+                sites[key]['body'] = ext_res.text
+            else:
                 raise requests.HTTPError('Wrong content type')
 
-            link_soup = BeautifulSoup(ext_res.text)
-            sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
-            sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
             sites[key]['error'] = False
         except Exception as e:
-            sites[key]['title'] = link
             sites[key]['error'] = True
             sites[key]['body'] = str(e)
+        finally:
+            if 'title' not in sites[key]:
+                sites[key]['title'] = link
 
     return flask.render_template('index.html', sites=sites)
 
