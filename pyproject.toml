@@ -11,6 +11,7 @@ beautifulsoup4 = "^4.9.1"
 python-slugify = "^4.0.1"
 flask = "^1.1.2"
 url-normalize = "^1.4.2"
+livereload = "^2.6.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
