@@ -31,6 +31,7 @@ def fetch():
         key = slugify(link)
         sites[key] = {}
         sites[key]['src'] = link
+        sites[key]['title'] = link
 
         user_agent = flask.request.user_agent
 
@@ -52,9 +53,6 @@ def fetch():
         except Exception as e:
             sites[key]['error'] = True
             sites[key]['body'] = str(e)
-        finally:
-            if 'title' not in sites[key]:
-                sites[key]['title'] = link
 
     return flask.render_template('index.html', sites=sites)
 
