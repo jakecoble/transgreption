@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from slugify import slugify
 from livereload import Server
 from url_normalize import url_normalize
+import url_transforms
 
 app = flask.Flask(__name__)
 
@@ -11,16 +12,27 @@ app = flask.Flask(__name__)
 @app.route('/')
 def fetch():
     url = flask.request.args.get('q')
-    res = requests.get(url_normalize(url))
 
-    soup = BeautifulSoup(res.text)
-    links = [anchor.get('href') for anchor in soup.find_all('a')]
+    if not url:
+        return flask.render_template('no-url.html')
+
+    try:
+        res = requests.get(url_normalize(url))
+
+        soup = BeautifulSoup(res.text)
+        links = [anchor.get('href') for anchor in soup.find_all('a')]
+
+    except Exception as e:
+        return flask.render_template('error.html', error=str(e))
 
     sites = {}
-    for link in links:
+    for raw_link in links:
+        link = url_transforms.apply(raw_link)
         key = slugify(link)
         sites[key] = {}
         sites[key]['src'] = link
+        sites[key]['title'] = link
+        sites[key]['raw_text'] = False
 
         user_agent = flask.request.user_agent
 
@@ -29,15 +41,18 @@ def fetch():
             ext_res.raise_for_status()
 
             content_type = ext_res.headers.get('content-type')
-            if not content_type.startswith('text/html'):
+            if content_type.startswith('text/html'):
+                link_soup = BeautifulSoup(ext_res.text)
+                sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
+                sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
+            elif content_type.startswith('text/plain'):
+                sites[key]['body'] = ext_res.text
+                sites[key]['raw_text'] = True
+            else:
                 raise requests.HTTPError('Wrong content type')
 
-            link_soup = BeautifulSoup(ext_res.text)
-            sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
-            sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
             sites[key]['error'] = False
-        except (requests.ConnectionError, requests.HTTPError) as e:
-            sites[key]['title'] = 'Failed to fetch this site!'
+        except Exception as e:
             sites[key]['error'] = True
             sites[key]['body'] = str(e)
 

@@ -29,7 +29,7 @@
                 <ul class="site-links">
                     {% for key, data in sites.items() %}
                         <li id="{{ key }}-link" class="link {{ 'site-load-error' if data['error'] }}">
-                            <a href="#{{ key }}">{{ data['title'] }}</a>
+                            <a href="#{{ key }}" title="{{ data['src'] }}" class="site-internal-link">{% if data['error'] %}<span class="icon-warning"></span>{% endif %}{{ data['title'] }}</a>
                             <a href="{{ data['src'] }}" class="site-external-link"><span class="icon-new-tab"></span></a>
                         </li>
                     {% endfor %}
@@ -40,12 +40,15 @@
                 {% for key, data in sites.items() %}
                 <div class="site-container">
                     <h2 id="{{ key }}" class="site-title{{ ' site-load-error' if data['error'] }}">{{ data['title'] }}</h2>
-                    <div class="site-content">
+                    <div class="site-content {{ 'site-raw-text' if data['raw_text'] }}">
                         {{ data['body']|safe }}
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+
     </body>
 </html>
