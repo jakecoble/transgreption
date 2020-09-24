@@ -89,3 +89,7 @@ body {
     background-color: #00AFB5;
     transition: background-color 0.5s;
 }
+
+.site-raw-text {
+    white-space: pre;
+}

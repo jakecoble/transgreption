@@ -32,6 +32,7 @@ def fetch():
         sites[key] = {}
         sites[key]['src'] = link
         sites[key]['title'] = link
+        sites[key]['raw_text'] = False
 
         user_agent = flask.request.user_agent
 
@@ -46,6 +47,7 @@ def fetch():
                 sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
             elif content_type.startswith('text/plain'):
                 sites[key]['body'] = ext_res.text
+                sites[key]['raw_text'] = True
             else:
                 raise requests.HTTPError('Wrong content type')
 

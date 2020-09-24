@@ -40,7 +40,7 @@
                 {% for key, data in sites.items() %}
                 <div class="site-container">
                     <h2 id="{{ key }}" class="site-title{{ ' site-load-error' if data['error'] }}">{{ data['title'] }}</h2>
-                    <div class="site-content">
+                    <div class="site-content {{ 'site-raw-text' if data['raw_text'] }}">
                         {{ data['body']|safe }}
                     </div>
                 </div>
