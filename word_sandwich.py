@@ -15,10 +15,14 @@ def fetch():
     if not url:
         return flask.render_template('no-url.html')
 
-    res = requests.get(url_normalize(url))
+    try:
+        res = requests.get(url_normalize(url))
 
-    soup = BeautifulSoup(res.text)
-    links = [anchor.get('href') for anchor in soup.find_all('a')]
+        soup = BeautifulSoup(res.text)
+        links = [anchor.get('href') for anchor in soup.find_all('a')]
+
+    except Exception as e:
+        return flask.render_template('error.html', error=str(e))
 
     sites = {}
     for link in links:
@@ -40,7 +44,7 @@ def fetch():
             sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
             sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
             sites[key]['error'] = False
-        except (requests.ConnectionError, requests.HTTPError) as e:
+        except Exception as e:
             sites[key]['title'] = link
             sites[key]['error'] = True
             sites[key]['body'] = str(e)
