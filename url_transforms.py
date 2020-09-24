@@ -4,7 +4,9 @@ from url_normalize import url_normalize
 # Prefix your string with 'r' to create a string literal that does not require
 # escaping. Note that such strings cannot end with a single backslash. See
 # https://docs.python.org/3/reference/lexical_analysis.html#string-and-bytes-literals
-# for more information
+# for more information.
+#
+# Regexes are applied to a url in order until one of them matches.
 
 TRANSFORMS = [
     {
