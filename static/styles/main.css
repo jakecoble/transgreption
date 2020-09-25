@@ -27,7 +27,8 @@ body {
 }
 
 .site-links {
-
+    max-height: 100%;
+    overflow: scroll;
 }
 
 .site-links .link {
