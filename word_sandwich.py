@@ -31,7 +31,7 @@ def fetch():
         key = slugify(link)
         sites[key] = {}
         sites[key]['src'] = link
-        sites[key]['title'] = link
+        sites[key]['title'] = raw_link
         sites[key]['raw_text'] = False
 
         user_agent = flask.request.user_agent
