@@ -33,6 +33,7 @@ body {
 
 .site-links .link {
     display: flex;
+    align-items: center;
     padding: 10px;
     justify-content: space-between;
 }
@@ -70,9 +71,8 @@ body {
     padding: 25px;
 }
 
-.site-load-error {
-    background-color: #4B0F16;
-    color: #FBE5E5;
+.site-load-failure h2 {
+    background-color: #C73E1D;
 }
 
 .link.site-load-error {
@@ -83,10 +83,6 @@ body {
     flex: content;
 }
 
-.icon-warning {
-    margin-right: 0.5em;
-}
-
 .focused-link {
     background-color: #00AFB5;
     transition: background-color 0.5s;
@@ -94,4 +90,39 @@ body {
 
 .site-raw-text {
     white-space: pre;
+}
+
+.icon-loading,
+.icon-success,
+.icon-failure {
+    margin-right: 0.5em;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+.icon-loading {
+    animation: spin 1s linear infinite;
+}
+
+.icon-success,
+.icon-failure {
+    display: none;
+}
+
+.load-success .icon-success {
+    display: inline-block;
+    color: #59CD90;
+}
+
+.load-failure .icon-failure {
+    display: inline-block;
+    color: #C73E1D;
+}
+
+.load-success .icon-loading,
+.load-failure .icon-loading {
+    display: none;
 }

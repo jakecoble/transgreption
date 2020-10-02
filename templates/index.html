@@ -28,8 +28,12 @@
             <div class="sidebar">
                 <ul class="site-links">
                     {% for key, data in sites.items() %}
-                        <li id="{{ key }}-link" class="link {{ 'site-load-error' if data['error'] }}">
-                            <a href="#{{ key }}" title="{{ data['src'] }}" class="site-internal-link">{% if data['error'] %}<span class="icon-warning"></span>{% endif %}{{ data['title'] }}</a>
+                        <li id="{{ key }}-link" class="link">
+                            <span class="icon-loading icon-spinner5"></span>
+                            <span class="icon-failure icon-cross"></span>
+                            <span class="icon-success icon-checkmark"></span>
+                            <a href="#{{ key }}" title="{{ data['src'] }}" class="site-internal-link">
+                                {{ data['title'] }}</a>
                             <a href="{{ data['src'] }}" class="site-external-link"><span class="icon-new-tab"></span></a>
                         </li>
                     {% endfor %}
@@ -39,15 +43,15 @@
             <div class="site-list">
                 {% for key, data in sites.items() %}
                 <div class="site-container">
-                    <h2 id="{{ key }}" class="site-title{{ ' site-load-error' if data['error'] }}">{{ data['title'] }}</h2>
-                    <div class="site-content {{ 'site-raw-text' if data['raw_text'] }}">
-                        {{ data['body']|safe }}
+                    <h2 id="{{ key }}" class="site-title">{{ data['title'] }}</h2>
+                    <div data-src="{{ data['src'] }}" class="site-content">
                     </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
 
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
 
     </body>

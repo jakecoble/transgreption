@@ -10,7 +10,7 @@ app = flask.Flask(__name__)
 
 
 @app.route('/')
-def fetch():
+def index():
     url = flask.request.args.get('q')
 
     if not url:
@@ -34,29 +34,35 @@ def fetch():
         sites[key]['title'] = raw_link
         sites[key]['raw_text'] = False
 
-        user_agent = flask.request.user_agent
-
-        try:
-            ext_res = requests.get(link, headers={'user-agent': str(user_agent)})
-            ext_res.raise_for_status()
-
-            content_type = ext_res.headers.get('content-type')
-            if content_type.startswith('text/html'):
-                link_soup = BeautifulSoup(ext_res.text)
-                sites[key]['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
-                sites[key]['body'] = ''.join(str(tag) for tag in link_soup.body)
-            elif content_type.startswith('text/plain'):
-                sites[key]['body'] = ext_res.text
-                sites[key]['raw_text'] = True
-            else:
-                raise requests.HTTPError('Wrong content type')
-
-            sites[key]['error'] = False
-        except Exception as e:
-            sites[key]['error'] = True
-            sites[key]['body'] = str(e)
-
     return flask.render_template('index.html', sites=sites)
+
+
+@app.route('/fetch')
+def fetch():
+    link = flask.request.args.get('url')
+    data = {}
+    user_agent = flask.request.user_agent
+
+    try:
+        ext_res = requests.get(link, headers={'user-agent': str(user_agent)})
+        ext_res.raise_for_status()
+
+        content_type = ext_res.headers.get('content-type')
+        if content_type.startswith('text/html'):
+            link_soup = BeautifulSoup(ext_res.text)
+            data['title'] = ''.join(str(tag) for tag in link_soup.find('title'))
+            data['body'] = ''.join(str(tag) for tag in link_soup.body)
+        elif content_type.startswith('text/plain'):
+            data['body'] = ext_res.text
+            data['raw_text'] = True
+        else:
+            raise requests.HTTPError('Wrong content type')
+
+    except Exception as e:
+        data['body'] = str(e)
+        return data, 500
+
+    return data
 
 
 if __name__ == '__main__':
