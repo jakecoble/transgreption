@@ -28,6 +28,8 @@ def index():
     sites = {}
     for raw_link in links:
         link = url_transforms.apply(raw_link)
+        if link == '__ANTI_INCEPTION__' or link == '__ANTI_ANCHOR__':
+          continue
         key = slugify(link)
         sites[key] = {}
         sites[key]['src'] = link

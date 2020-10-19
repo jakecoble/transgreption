@@ -18,9 +18,14 @@ TRANSFORMS = [
     'replace': r'/padm.us/\1/export/txt',
   },
   { # Anti-Inception Hack! Intentionally break links to megadoc...
-    'find':    r'transgreption\.jakecoble\.repl\.co',
-    'replace': r'antiinception',
-  }
+    'find':    r'^https:\/\/transgreption\.jakecoble\.repl\.co.*$',
+    'replace': r'__ANTI_INCEPTION__',
+  },
+  { # Don't want anchor links
+    'find':    r'^\#\w+$',
+    'replace': r'__ANTI_ANCHOR__',
+  },
+
 ]
 
 
