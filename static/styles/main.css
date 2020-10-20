@@ -61,6 +61,7 @@ body {
 
 .site-content {
     padding: 25px;
+    overflow: auto;
 }
 
 .site-title {
