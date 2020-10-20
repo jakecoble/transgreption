@@ -24,8 +24,7 @@ TRANSFORMS = [
   { # Don't want anchor links
     'find':    r'^\#\w+$',
     'replace': r'__ANTI_ANCHOR__',
-  },
-
+  }
 ]
 
 

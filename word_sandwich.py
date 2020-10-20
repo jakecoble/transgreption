@@ -1,5 +1,6 @@
 import flask
 import requests
+from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 from slugify import slugify
 from livereload import Server
@@ -46,6 +47,8 @@ def fetch():
     user_agent = flask.request.user_agent
 
     try:
+        if flask.request.host_url == link:
+            raise requests.HTTPError('Transgreption!')
         ext_res = requests.get(link, headers={'user-agent': str(user_agent)})
         ext_res.raise_for_status()
 
